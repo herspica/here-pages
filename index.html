@@ -9,15 +9,20 @@
     <script>
       (() => {
         let theme = 'white';
-        try { if (localStorage.getItem('still-here:theme:v1') === 'universe') theme = 'universe'; } catch {}
+        try {
+          const saved = localStorage.getItem('still-here:theme:v1');
+          if (saved === 'universe' || saved === 'event-horizon') theme = saved;
+        } catch {}
+        const preview = new URLSearchParams(location.search).get('theme');
+        if (preview === 'white' || preview === 'universe' || preview === 'event-horizon') theme = preview;
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme === 'white' ? 'light' : 'dark';
-        document.querySelector('meta[name="theme-color"]').content = theme === 'white' ? '#ffffff' : '#030303';
+        document.querySelector('meta[name="theme-color"]').content = theme === 'white' ? '#ffffff' : theme === 'event-horizon' ? '#020305' : '#030303';
       })();
     </script>
     <title>still here</title>
-    <script type="module" crossorigin src="/here-pages/assets/index-D6e5FUZl.js"></script>
-    <link rel="stylesheet" crossorigin href="/here-pages/assets/index-BqlzTWUo.css">
+    <script type="module" crossorigin src="/here-pages/assets/index-7m20ag9l.js"></script>
+    <link rel="stylesheet" crossorigin href="/here-pages/assets/index-D1G_U9p7.css">
   </head>
   <body>
     <div id="root"></div>
